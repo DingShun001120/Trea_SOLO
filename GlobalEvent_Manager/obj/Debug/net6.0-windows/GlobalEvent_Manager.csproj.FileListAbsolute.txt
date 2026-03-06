@@ -1,0 +1,9 @@
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\App.g.cs
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\GlobalEvent_Manager_MarkupCompile.cache
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\MainWindow.baml
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\MainWindow.g.cs
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\GlobalEvent_Manager.g.resources
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\GlobalEvent_Manager.GeneratedMSBuildEditorConfig.editorconfig
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\GlobalEvent_Manager.AssemblyInfoInputs.cache
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\GlobalEvent_Manager.AssemblyInfo.cs
+D:\项目代码\架构组件-全局事件管理器\GlobalEvent_Manager\obj\Debug\net6.0-windows\GlobalEvent_Manager.csproj.CoreCompileInputs.cache
