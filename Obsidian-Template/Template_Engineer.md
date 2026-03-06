@@ -13,24 +13,24 @@ try {
 -%>
 ---
 uid: <% tp.file.creation_date("YYYYMMDDHHmm") %>
+aliases: []
 type: Work-Daily
 role: Engineer
 tags:
   - work/engineer
   - review/daily
   - log/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>
+status: Done
 date: <% tp.file.creation_date("YYYY-MM-DD-dddd") %>
 week: <% tp.date.now("YYYY-[W]ww") %>
 quarter: <% tp.date.now("YYYY-[Q]Q") %>
 weather: <% weather %>
-# Project Context
 project: 
 sprint: 
 version: 
-# Status & Stats
-status: Done
-performance_score: 5 # 1-5 Self-Assessment
 work_hours: 8
+performance_score: 5
+cssclasses: []
 ---
 
 # 🛡️ 工程师工作日志 | Engineer Daily Log

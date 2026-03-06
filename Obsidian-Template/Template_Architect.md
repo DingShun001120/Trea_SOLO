@@ -13,24 +13,24 @@ try {
 -%>
 ---
 uid: <% tp.file.creation_date("YYYYMMDDHHmm") %>
+aliases: []
 type: Work-Daily
 role: Architect
 tags:
   - work/architect
   - review/daily
   - log/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>
+status: Done
 date: <% tp.file.creation_date("YYYY-MM-DD-dddd") %>
 week: <% tp.date.now("YYYY-[W]ww") %>
 quarter: <% tp.date.now("YYYY-[Q]Q") %>
 weather: <% weather %>
-# Project Context
 project: 
 sprint: 
 version: 
-# Status & Stats
-status: Done
-performance_score: 5 # 1-5 Self-Assessment
 decision_count: 0
+performance_score: 5
+cssclasses: []
 ---
 
 # 🏗️ 架构师工作日志 | Architect Daily Log
