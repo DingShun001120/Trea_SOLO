@@ -47,57 +47,46 @@ performance_score: # 1-5分 (Self-Assessment)
 
 ---
 
-## 💎 核心资产积累 | Valuable Assets Log (重点)
-*拒绝流水账，只记录真正有价值的内容*
+## 💎 核心资产积累 | Core Assets Log (5维记录)
+*每日必填，积累个人与团队资产*
 
-### 1️⃣ 🐞 Bug 知识库 | Bug Knowledge Base
-> *遇到 LoaderLock, TargetInvocationException 等疑难杂症必填*
-- **Bug/Issue**: 
-- **Environment (环境)**: 
-- **Root Cause (原因)**: 
-- **Solution (解决)**: 
-- **Keywords (关键词)**: #Tag1 #Tag2
+### 1️⃣ 🐞 问题追踪 | Problem Tracking
+> *记录 Bug、异常或线上事故*
+- **Issue**: (e.g. 生产环境 NullReferenceException)
+- **Context**: 
+- **Root Cause**: 
+- **Solution**: 
+- **Status**: Open / Resolved
 
-### 2️⃣ ⚡ 性能与系统优化 | Performance & Optimization
-> *记录系统卡顿、内存泄漏等问题的优化过程*
-- **Symptom (现象)**: 
-- **Diagnosis (诊断)**: 
-- **Optimization (优化)**: 
-    - *Before*: 
-    - *After*: 
-
-### 3️⃣ 🛠️ 工具百宝箱 | Toolbox
-> *记录新学到的命令行工具、插件或脚本*
-- **Tool Name**: 
-- **Usage (用途)**: 
-- **Command/Snippet**:
-    ```bash
-    # 粘贴你的命令
+### 2️⃣ 📚 技术沉淀 | Technical Accumulation
+> *记录新学到的技术点、最佳实践或代码片段*
+- **Topic**: 
+- **Key Takeaway**: 
+- **Code Snippet / Reference**:
+    ```csharp
+    
     ```
 
-### 4️⃣ 🤖 AI 交互资产 | AI Prompt Assets
-> *记录高效的 Prompt，形成个人的 Prompt Library*
-- **Goal (目标)**: 
+### 3️⃣ 🏗️ 架构演进 | Architecture Evolution
+> *记录代码重构、模块拆分或设计模式的应用*
+- **Module**: 
+- **Change**: (e.g. 从硬编码改为策略模式)
+- **Reason**: 
+
+### 4️⃣ ⚡ 效率优化 | Efficiency Optimization
+> *记录性能优化、构建速度提升或开发工具改进*
+- **Item**: (e.g. 接口响应时间优化)
+- **Optimization**: 
+    - *Before*: 500ms
+    - *After*: 50ms
+- **Method**: 
+
+### 5️⃣ 🤖 AI 协作记录 | AI Collaboration Log
+> *记录高效 Prompt 或 AI 辅助开发的成果*
+- **Task**: 
 - **Prompt Used**: 
     > 
-- **Result/Insight**: 
-
----
-
-## 💻 技术攻坚 | Technical Deep Dive
-*记录今日遇到的架构思考或技术选型*
-
-### ⚖️ 技术选型记录 | Tech Stack Selection (Optional)
-- **Topic**: (e.g. MQTT vs RabbitMQ)
-- **Decision**: 
-- **Reasons**: 
-    1. 
-    2. 
-
-### 代码片段 (Code Snippet)
-```csharp
-// 关键代码或重构逻辑
-```
+- **Outcome**: 
 
 ---
 
@@ -114,7 +103,7 @@ performance_score: # 1-5分 (Self-Assessment)
 ## 🔄 日终检查 | End-of-Day Checklist
 - [ ] 代码已提交 (Code Committed)
 - [ ] 任务状态已更新 (Jira/Board Updated)
-- [ ] **核心资产已记录 (Bug/Tool/Prompt)**
+- [ ] **核心5维资产已记录**
 - [ ] 明日计划已梳理 (Tomorrow Planned)
 
 ## 📊 今日数据 | Daily Stats
