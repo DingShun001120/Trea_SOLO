@@ -12,17 +12,25 @@ try {
 } catch(e) {}
 -%>
 ---
+uid: <% tp.file.creation_date("YYYYMMDDHHmm") %>
 type: Work-Daily
 role: Engineer
 tags:
   - work/engineer
   - review/daily
+  - log/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>
 date: <% tp.file.creation_date("YYYY-MM-DD-dddd") %>
+week: <% tp.date.now("YYYY-[W]ww") %>
+quarter: <% tp.date.now("YYYY-[Q]Q") %>
 weather: <% weather %>
+# Project Context
 project: 
 sprint: 
-jira_board: 
-performance_score: # 1-5分 (Self-Assessment)
+version: 
+# Status & Stats
+status: Done
+performance_score: 5 # 1-5 Self-Assessment
+work_hours: 8
 ---
 
 # 🛡️ 工程师工作日志 | Engineer Daily Log
