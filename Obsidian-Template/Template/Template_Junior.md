@@ -13,7 +13,6 @@ uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
 标签:
   - work/junior
   - review/daily
-  - "log/<% tp.date.now('YYYY') %>/<% tp.date.now('MM') %>"
 角色: Junior
 状态: Done
 周次: "<% tp.date.now('YYYY-[W]ww') %>"
