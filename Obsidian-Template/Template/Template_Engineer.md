@@ -5,14 +5,14 @@ const config = {
     weather: ""
 };
 const meta = await tp.user.getDiaryMeta(tp, config);
-%>
+_%>
 ---
 uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
 日期: "<% tp.file.creation_date('YYYY-MM-DD') %>"
 别名: []
 标签:
-  - work/engineer
-  - review/daily
+ - work/engineer
+ - review/daily
 角色: Engineer
 状态: Done
 周次: "<% tp.date.now('YYYY-[W]ww') %>"

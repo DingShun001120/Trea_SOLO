@@ -5,7 +5,7 @@ const config = {
     weather: ""
 };
 const meta = await tp.user.getDiaryMeta(tp, config);
-%>
+_%>
 ---
 uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
 日期: "<% tp.file.creation_date('YYYY-MM-DD') %>"
