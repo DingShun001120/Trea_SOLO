@@ -1,35 +1,21 @@
-<%*
-let url = 'https://www.tianqi.com/binhuqu/';
-let weather = '无锡 天气获取失败 Weather fetch failed';
-try {
-  let res = await request({url: url, method: "GET"});
-  res = res.replace(/\s/g,'');
-  let r = /<ddclass="weather">[\s\S]*?<\/dd>/g;
-  let data = r.exec(res)[0];
-  r = /<span><b>(.*?)<\/b>(.*?)<\/span>/g;
-  data = r.exec(data);
-  weather = '无锡 ' + data[1] + ' ' + data[2];
-} catch(e) {}
--%>
 ---
-uid: <% tp.file.creation_date("YYYYMMDDHHmm") %>
-aliases: []
-type: Work-Daily
-role: Architect
-tags:
+uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
+日期: "<% tp.file.creation_date('YYYY-MM-DD') %>"
+别名: []
+标签:
   - work/architect
   - review/daily
-  - log/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>
-status: Done
-date: <% tp.file.creation_date("YYYY-MM-DD-dddd") %>
-week: <% tp.date.now("YYYY-[W]ww") %>
-quarter: <% tp.date.now("YYYY-[Q]Q") %>
-weather: <% weather %>
-project: 
-sprint: 
-version: 
-decision_count: 0
-performance_score: 5
+  - "log/<% tp.date.now('YYYY') %>/<% tp.date.now('MM') %>"
+角色: Architect
+状态: Done
+周次: "<% tp.date.now('YYYY-[W]ww') %>"
+季度: "<% tp.date.now('YYYY-[Q]Q') %>"
+天气: "<% tp.user.weather(tp) %>"
+项目: []
+冲刺: ""
+版本: ""
+决策数: 0
+绩效评分: 5
 cssclasses: []
 ---
 

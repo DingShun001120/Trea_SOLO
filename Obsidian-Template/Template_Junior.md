@@ -12,22 +12,20 @@ try {
 } catch(e) {}
 -%>
 ---
-uid: <% tp.file.creation_date("YYYYMMDDHHmm") %>
+uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
 aliases: []
-type: Work-Daily
-role: Junior
-tags:
+标签:
   - work/junior
   - review/daily
-  - log/<% tp.date.now("YYYY") %>/<% tp.date.now("MM") %>
-status: Done
-date: <% tp.file.creation_date("YYYY-MM-DD-dddd") %>
-week: <% tp.date.now("YYYY-[W]ww") %>
-quarter: <% tp.date.now("YYYY-[Q]Q") %>
-weather: <% weather %>
-project: 
-sprint: 
-mentor: 
+  - "log/<% tp.date.now('YYYY') %>/<% tp.date.now('MM') %>"
+角色: Junior
+状态: Done
+周次: "<% tp.date.now('YYYY-[W]ww') %>"
+季度: "<% tp.date.now('YYYY-[Q]Q') %>"
+天气: "<% tp.user.weather(tp) %>"
+项目: []
+sprint: ""
+mentor: []
 learning_hours: 2
 performance_score: 5
 cssclasses: []
