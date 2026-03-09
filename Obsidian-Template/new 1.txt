@@ -1,0 +1,559 @@
+<%*
+
+const config = {
+
+location: "浙江省温州市", // 当前指定地理位置，会根据该位置获取对应天气。不指定则根据当前IP地址自动获取地址位置和天气信息。
+
+adcode: "", // 若指定adcode，优先根据adcode获取该地理编码对应的天气
+
+weather: ""
+
+};
+
+const meta = await tp.user.getDiaryMeta(tp, config);
+
+%>---
+
+tags:
+
+- Topic/DailyNote
+
+title: <% tp.file.title %>
+
+type:
+
+- Daily Note
+
+date: <% tp.date.now("YYYY-MM-DD") %>
+
+created_time: <% tp.file.creation_date("YYYY-MM-DD HH:mm:ss") %>
+
+modify_time: <% tp.file.last_modified_date("YYYY-MM-DD HH:mm:ss") %>
+
+lunar_calendar: <% meta.lunarDate %>
+
+week: <% tp.file.creation_date("dddd") %>
+
+location: <% meta.location %>
+
+weather: <% meta.weather %>
+
+working_minutes: <%*
+
+let day = tp.file.creation_date("dddd");
+
+if (day === "星期日") {
+
+tR += "0";
+
+} else {
+
+tR += "540";
+
+}
+
+%>
+
+health:
+
+events:
+
+aliases:
+
+- Daily Note - <% tp.date.now("YYYY-MM-DD") %>
+
+---
+
+# Daily Note - <% tp.date.now("YYYY-MM-DD") %>
+
+
+
+## 早间计划
+
+
+
+```tasks
+
+scheduled on or before <% tp.date.now("YYYY-MM-DD", 0) %>
+
+# tags does not include #Topic/Ignore
+
+show tree
+
+# short mode
+
+# no start date
+
+hide recurrence rule
+
+hide created date
+
+hide task count
+
+# is not blocked
+
+not done
+
+group by scheduled
+
+```
+
+```tasks
+
+(heading includes 本周) OR (due on or before <% tp.date.now("YYYY-MM-DD", 0) %>) OR (scheduled on or before <% tp.date.now("YYYY-MM-DD", 0) %>) OR (due before in 8 days)
+
+# tags does not include #Topic/Ignore
+
+show tree
+
+# short mode
+
+# no start date
+
+hide recurrence rule
+
+hide created date
+
+# hide task count
+
+# is not blocked
+
+not done
+
+group by due
+
+group by priority
+
+```
+
+<% tp.file.cursor() %>
+
+### 每日跟进
+
+
+
+```tasks
+
+((no scheduled date) OR (scheduled after <% tp.date.now("YYYY-MM-DD", 0) %>)) AND ((no due date) OR (due after <% tp.date.now("YYYY-MM-DD", 0) %>))
+
+# tags regex does not match /(#Topic/Trigger|#Topic/Ignore)/
+
+tags regex does not match /(#Topic/Ignore)/
+
+has start date
+
+starts on or before <% tp.date.now("YYYY-MM-DD", 0) %>
+
+show tree
+
+# short mode
+
+# hide created date
+
+# hide task count
+
+# is not blocked
+
+not done
+
+group by filename
+
+sort by status.type
+
+sort by urgency
+
+sort by due
+
+sort by priority
+
+sort by path
+
+sort by description
+
+```
+
+
+
+### 触发器
+
+
+
+```tasks
+
+((no scheduled date) OR (scheduled after <% tp.date.now("YYYY-MM-DD", 0) %>)) AND ((no due date) OR (due after <% tp.date.now("YYYY-MM-DD", 0) %>))
+
+heading regex does not match /本周/
+
+tags includes #Topic/Trigger
+
+# no start date
+
+# no due date
+
+# no scheduled date
+
+show tree
+
+# hide tags
+
+hide created date
+
+# is not blocked
+
+not done
+
+group by filename
+
+```
+
+
+
+### 未来待办
+
+
+
+```tasks
+
+path regex matches /(Collect\/Projects\/Beancount-Trans\/Beancount-Trans|Archive\/Personal\/Personal|Collect\/Projects\/Home/Family)/
+
+heading includes 未来
+
+tags does not include #Topic/Trigger
+
+tags does not include #Topic/Plans
+
+tags does not include #Topic/Ignore
+
+show tree
+
+no start date
+
+# hide backlink
+
+# short mode
+
+# is not blocked
+
+not done
+
+group by filename
+
+group by priority
+
+```
+
+
+
+#### 工作待办
+
+
+
+```tasks
+
+path regex matches /(Archive\/Work\/00_温州市听云科技有限公司\/TingYun)/
+
+heading includes 未来
+
+tags does not include #Topic/Trigger
+
+tags does not include #Topic/Plans
+
+tags does not include #Topic/Ignore
+
+show tree
+
+no start date
+
+# hide backlink
+
+# short mode
+
+# is not blocked
+
+not done
+
+group by filename
+
+group by priority
+
+```
+
+
+
+## ⚙️ 触发器管理
+
+
+
+1. [目录布局](Archive/Personal/触发器管理.md#目录布局)（所有设备的建议布局）
+
+2. [备份管理](Archive/Personal/触发器管理.md#备份管理)（项目备份时、定时备份时、备份文件命名时）
+
+1. ISO 镜像（aigo 保存常用，SanDisk 全量保存）
+
+2. 安装包（aigo 保存常用，SanDisk 全量保存）
+
+3. 媒体文件（照片、视频、音频）
+
+4. 工作文件及超过 50M 的备份文件
+
+3. [银行账户管理](Archive/Personal/触发器管理.md#银行账户管理)（新建储蓄卡、信用卡账户、新增 Beancount-Trans 解析条目时）
+
+4. [新增联系人](Archive/Personal/触发器管理.md#联系人管理)（接触到新的联系人或联系方式）
+
+5. [采购管理](Archive/Personal/触发器管理.md#采购)（年前、618、双十一、经济下行，采购完成后更新数量至 [Odoo](https://odoo.dhr2333.cn/)）
+
+6. [命名规则](Archive/Personal/触发器管理.md#通用命名管理)（[创建目录](Archive/Personal/触发器管理.md#目录命名) 时、[创建文件](Archive/Personal/触发器管理.md#文件命名) 时、[引用至社交](Archive/Personal/触发器管理.md#URI) 时、[新建代码块](Archive/Personal/触发器管理.md#通用命名管理) 时、[添加标签](Archive/Personal/触发器管理.md#标签命名) 时、[Syncthing共享目录](Archive/Personal/触发器管理.md#Syncthing) 时）
+
+1. 新项目：Obsidian、Bookmark、KeePass 等达到量级时的目录标签管理
+
+2. 新建待办：标签、创建时间、开始时间、优先级、截止时间、依赖
+
+3. ⭐标签种类
+
+1. Collect：临时分类，定期整理至其他分类中
+
+2. Person：标记当前活动中的重点关注
+
+3. Project/Work：仅在确认**不可复用**的情况下使用此类标签
+
+4. Tools：对使用到的工具进行标记，便于**快速查找**和管理
+
+5. Topic：特殊分类，例如日记、触发器等
+
+7. 事件记录（[工作](Overview.md#Employer)、[地点](Overview.md#Location)，普通事件由 events 记录）
+
+8. 日记记录
+
+1. 当天待办和日常生活记录使用 Tasks 格式记录至各自标题并添加上标签
+
+2. 可持久化记录至各自文档并引用至日记
+
+9. 活动通知记录 Full Calendar，看板对 Tasks 进行管理
+
+1. 格式：
+
+1. 指定时间做某事： `TIME HH:mm:ss WITH xxx TO xxx DO xxx`
+
+2. 多件事情：`xxx AND xxx` OR `xxx OR xxx`
+
+2. 未来：拥有 [start:: date]、[scheduled:: [date]]、[due:: [date]]、`#Topic/Trigger` 标签的 Task（任一）
+
+1. [start:: date] 不由我完成，但需要跟进的 Task
+
+2. [scheduled:: [date]] 用于提供准备时间
+
+3. [due:: [date]] 用于具体完成的 Deadline
+
+4. `#Topic/Trigger` 触发器 Task
+
+5. `#Topic/Ignore` 常用于子 Tasks，同时根 Tasks 配置 due
+
+3. 本周：能自己把控进度的本周内要完成的 Task
+
+4. 归档：重复任务及正常归档任务（可以直接通过 Tasks 插件来完成）
+
+5. 早间计划：实际由我进行完成的本周内待办
+
+6. 每日跟进：由第三方实现但我需跟进进度
+
+7. 触发器：每天查看一下看是否有需要完成的
+
+8. 未来待办：实际由我进行完成的未来待办
+
+10. 遇到三次可重复但造成麻烦或困扰的事，根据情况记录为重复任务或习惯养成。
+
+
+
+#### ⚙️装修触发器
+
+
+
+1. 定期存档（合同签订或有争议的聊天记录）
+
+2. 对于通用流程记录至主材管理，临时需求记录至看板
+
+
+
+## ✅ 完成情况
+
+
+
+```tasks
+
+(done on <% tp.date.now("YYYY-MM-DD") %>) OR (cancelled on <% tp.date.now("YYYY-MM-DD") %>)
+
+tags do not include #Topic/Repeat
+
+show tree
+
+hide task count
+
+group by status
+
+```
+
+
+
+### 工作笔记
+
+
+
+
+
+```tasks
+
+path regex matches /(Archive\/Work\/00_温州市听云科技有限公司\/TingYun|Collect\/Projects\/Beancount-Trans\/Beancount-Trans)/
+
+(done on <% tp.date.now("YYYY-MM-DD") %>) OR (cancelled on <% tp.date.now("YYYY-MM-DD") %>)
+
+show tree
+
+# short mode
+
+hide task count
+
+hide backlink
+
+group by filename
+
+```
+
+
+
+### 家庭笔记
+
+
+
+
+
+```tasks
+
+(path includes Collect/Projects/Home/Family) OR (path includes Archive/Personal/Personal) OR (path includes Archive/Repeat)
+
+tag does not include #Person
+
+(done on <% tp.date.now("YYYY-MM-DD") %>) OR (cancelled on <% tp.date.now("YYYY-MM-DD") %>)
+
+show tree
+
+# short mode
+
+hide recurrence rule
+
+hide task count
+
+hide backlink
+
+group by filename
+
+```
+
+
+
+### ‍ ‍ 亲人动态
+
+
+
+
+
+```tasks
+
+tag include #Person
+
+(done on <% tp.date.now("YYYY-MM-DD") %>) OR (cancelled on <% tp.date.now("YYYY-MM-DD") %>)
+
+path does not include Archive/Notes
+
+show tree
+
+# short mode
+
+hide task count
+
+hide backlink
+
+```
+
+
+
+## ‍♂️ 个人感悟
+
+
+
+
+
+
+
+## 结束语
+
+
+
+每日 Git 提交前需确保：
+
+1. 所有工作汇总至对应看板 或 以 Task 记录至日记
+
+2. 文档属性记录：重大事件、工时
+
+3. 文档内容记录：亲人动态、个人感悟
+
+
+
+### ⏲️日历计划
+
+
+
+
+
+### 中长期计划
+
+
+
+```tasks
+
+tags includes #Topic/Plans
+
+hide task count
+
+show tree
+
+not done
+
+```
+
+
+
+### [健康管理](Collect/健康管理.md)
+
+
+
+眼睛保护：20-20-20 原则（==每工作 20 分钟，望向 20 英尺约 6 米外的物体，至少 20 秒==）
+
+坐姿：==避免久坐，背部挺直，脚平放地面，膝盖与臀部平行，手肘与桌面平行。==支撑腰部。
+
+体重：由 HUAWEI Health 进行管理
+
+1. *脂肪率偏高*，脂肪过多会增加代谢综合征和慢性疾病风险。建议==增加粗粮==[^1]==和高膳食纤维食物==[^2] 比例，可避免脂肪过多囤积，理想脂肪率：15.0%
+
+2. *较多的内脏脂肪*会增加脂肪肝风险，可能影响呼吸系统、消化系统、心血管系统等系统功能。建议==吃东西细嚼慢咽，减少碳酸饮料摄入，避免过量饮食==。同时减少久坐，避免腹部脂肪囤积。
+
+3. 体内肌肉含量适中，但体内脂肪含量偏多，身体形态整体美观度较建议合理膳食，降低油脂摄入。进行==高强度间歇有氧运动==[^3]，有利于脂肪燃烧，提高新陈代谢。
+
+4. 水分率维持需保证==每天至少 1500 毫升的饮水量==（白开水、淡茶、花草茶等）
+
+心脏健康：*心率偏高*，长期持续的心动过速会导致心脏功能下降，可能是缺乏锻炼、缺水、肥胖导致的。建议==每天进行 30 分钟左右跑步、游泳等有氧运动==[^4]
+
+睡眠时间：晚上 10 点至早上 6 点 或 11 点至早上 7 点
+
+5. 建议==睡前泡脚 15 到 30 分钟==，可减少*夜间易醒*问题
+
+6. 睡前 2 到 3 小时（==20:00 禁食==）不要进食且避免咖啡因（如咖啡、茶、巧克力）、辛辣食物和高糖食物
+
+
+
+[^1]: 全谷物食品（全麦面包、糙米、玉米、燕麦片等）， 豆类（黑豆、扁豆、鹰嘴豆等），坚果和种子（杏仁、奇亚籽、亚麻籽等）
+
+[^2]: 全谷物食品（全麦产品、糙米、玉米、燕麦片等）， 豆类（黑豆、扁豆、鹰嘴豆等），水果（带皮苹果、带皮梨带皮、浆果等），蔬菜（胡萝卜、芹菜、西兰花等）
+
+[^3]: 快速冲刺，高强度骑行，快速爬楼，结合俯卧撑、深蹲、冲刺、开合跳等高强度体重训练，快速跳绳
+
+[^4]: 需要大量氧气供能的运动

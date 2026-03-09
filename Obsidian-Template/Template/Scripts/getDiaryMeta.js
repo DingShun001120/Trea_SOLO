@@ -4,9 +4,9 @@
  */
 module.exports = async (tp, config = {}) => {
     // 高德地图 API 配置
-    const gaodeApiKey = "YOUR_AMAP_API_KEY"; // ⚠️请替换为您的高德地图 API 密钥
+    const gaodeApiKey = "5bababc2779f92d967908b900c158e4e"; // ⚠️请替换为您的高德地图 API 密钥
     // 聚合数据 API 配置（用于农历日期）
-    const juheApiKey = "YOUR_JUHE_API_KEY"; // ⚠️请替换为您的聚合数据 API 密钥
+    const juheApiKey = "a63532bd65f446cd3aa5118d5770926a"; // ⚠️请替换为您的聚合数据 API 密钥
 
     // 检查是否已配置 Key
     if (gaodeApiKey === "YOUR_AMAP_API_KEY") {
