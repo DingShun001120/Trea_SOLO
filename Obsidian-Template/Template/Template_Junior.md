@@ -1,19 +1,15 @@
 <%*
-let url = 'https://www.tianqi.com/binhuqu/';
-let weather = '无锡 天气获取失败 Weather fetch failed';
-try {
-  let res = await request({url: url, method: "GET"});
-  res = res.replace(/\s/g,'');
-  let r = /<ddclass="weather">[\s\S]*?<\/dd>/g;
-  let data = r.exec(res)[0];
-  r = /<span><b>(.*?)<\/b>(.*?)<\/span>/g;
-  data = r.exec(data);
-  weather = '无锡 ' + data[1] + ' ' + data[2];
-} catch(e) {}
--%>
+const config = {
+    location: "",
+    adcode: "",
+    weather: ""
+};
+const meta = await tp.user.getDiaryMeta(tp, config);
+%>
 ---
 uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
-aliases: []
+日期: "<% tp.file.creation_date('YYYY-MM-DD') %>"
+别名: []
 标签:
   - work/junior
   - review/daily
@@ -22,7 +18,9 @@ aliases: []
 状态: Done
 周次: "<% tp.date.now('YYYY-[W]ww') %>"
 季度: "<% tp.date.now('YYYY-[Q]Q') %>"
-天气: "<% tp.user.weather(tp) %>"
+天气: "<% meta.weather %>"
+位置: "<% meta.location %>"
+农历: "<% meta.lunarDate %>"
 项目: []
 sprint: ""
 mentor: []

@@ -1,3 +1,11 @@
+<%*
+const config = {
+    location: "",
+    adcode: "",
+    weather: ""
+};
+const meta = await tp.user.getDiaryMeta(tp, config);
+%>
 ---
 uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
 日期: "<% tp.file.creation_date('YYYY-MM-DD') %>"
@@ -10,7 +18,9 @@ uid: "<% tp.file.creation_date('YYYYMMDDHHmm') %>"
 状态: Done
 周次: "<% tp.date.now('YYYY-[W]ww') %>"
 季度: "<% tp.date.now('YYYY-[Q]Q') %>"
-天气: "<% tp.user.weather(tp) %>"
+天气: "<% meta.weather %>"
+位置: "<% meta.location %>"
+农历: "<% meta.lunarDate %>"
 项目: []
 冲刺: ""
 版本: ""
