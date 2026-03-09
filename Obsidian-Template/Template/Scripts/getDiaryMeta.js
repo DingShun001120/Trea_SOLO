@@ -26,9 +26,19 @@ module.exports = async (tp, config = {}) => {
     let weather = inputWeather;
     let lunarDate = "无法获取农历日期";
 
-    // 辅助函数：使用原生 fetch 请求 JSON
+    // 辅助函数：优先使用 Obsidian 的 requestUrl (解决 CORS/Mixed Content)，降级使用 fetch
     async function fetchJson(url) {
         try {
+            // 尝试使用 Obsidian 的 requestUrl API (绕过 CORS/Mixed Content)
+            if (typeof app !== 'undefined' && app.requestUrl) {
+                const response = await app.requestUrl({ url: url });
+                if (response.status !== 200) {
+                     throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json;
+            }
+            
+            // 降级使用 fetch
             const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -104,7 +114,7 @@ module.exports = async (tp, config = {}) => {
     } else {
         try {
             let apiDate = tp.date.now("YYYY-MM-DD");
-            // 尝试使用 https，如果失败可能需要回退到 http
+            // 尝试使用 http，配合 requestUrl 可解决 Mixed Content 问题
             const lunarURL = `http://v.juhe.cn/calendar/day?date=${apiDate}&key=${juheApiKey}`;
             const JsonData = await fetchJson(lunarURL);
             
