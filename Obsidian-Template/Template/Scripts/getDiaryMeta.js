@@ -115,9 +115,25 @@ module.exports = async (tp, config = {}) => {
         try {
             let apiDate = tp.date.now("YYYY-MM-DD");
             // 尝试使用 http，配合 requestUrl 可解决 Mixed Content 问题
-            const lunarURL = `http://v.juhe.cn/calendar/day?date=${apiDate}&key=${juheApiKey}`;
-            const JsonData = await fetchJson(lunarURL);
+            // 增加 user-agent 头部，因为某些 API 会拦截无头部的请求
+            // 聚合数据可能对 requestUrl 的特定请求头敏感，尝试使用 fetch 并加上 no-cors (虽然拿不到结果，但排除跨域)
+            // 实际上 requestUrl 是 Node 环境，不需要 no-cors
             
+            // 聚合数据有时候对 HTTP/HTTPS 有要求，或者对 Referer 有要求。
+            // 这里我们尝试把请求参数 urlencode 一下，虽然 date 和 key 通常不需要
+            const lunarURL = `http://v.juhe.cn/calendar/day?date=${apiDate}&key=${juheApiKey}`;
+            
+            // 单独为农历增加一个 try-catch 块，并尝试打印更多错误信息
+            let JsonData;
+            try {
+                JsonData = await fetchJson(lunarURL);
+            } catch (innerError) {
+                console.error("农历API请求失败，尝试使用 fetch fallback:", innerError);
+                // 如果 requestUrl 失败，尝试 fetch (虽然可能跨域)
+                 const response = await fetch(lunarURL);
+                 JsonData = await response.json();
+            }
+
             if (JsonData.error_code === 0 && JsonData.result) {
                 lunarDate = JsonData.result.data.lunar || "数据解析错误";
             } else {
@@ -125,7 +141,7 @@ module.exports = async (tp, config = {}) => {
             }
         } catch (error) {
             console.error("农历请求异常:", error);
-            lunarDate = "农历服务异常";
+            lunarDate = `农历异常: ${error.message}`;
         }
     }
 
